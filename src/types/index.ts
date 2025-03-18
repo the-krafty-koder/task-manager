@@ -9,4 +9,5 @@ export interface Task {
   title: string;
   description: string;
   stage: StageOptions;
+  index?: number;
 }

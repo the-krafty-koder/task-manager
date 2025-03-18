@@ -54,10 +54,55 @@ const tasksSlice = createSlice({
       state.tasks = action.payload;
       saveTasksToLocalStorage(state.tasks);
     },
+    reorderTasks: (
+      state,
+      action: PayloadAction<{
+        sourceIndex: number;
+        destinationIndex: number;
+        stage: StageOptions;
+      }>
+    ) => {
+      const { sourceIndex, destinationIndex, stage } = action.payload;
+
+      const stageTasks = state.tasks.filter((task) => task.stage === stage);
+
+      if (sourceIndex === destinationIndex) return;
+
+      const sourceTask = stageTasks[sourceIndex];
+      const destinationTask = stageTasks[destinationIndex];
+
+      if (!sourceTask || !destinationTask) return;
+
+      const sourceTaskIndexInAllTasks = state.tasks.findIndex(
+        (task) => task.id === sourceTask.id
+      );
+      const destinationTaskIndexInAllTasks = state.tasks.findIndex(
+        (task) => task.id === destinationTask.id
+      );
+
+      if (
+        sourceTaskIndexInAllTasks === -1 ||
+        destinationTaskIndexInAllTasks === -1
+      )
+        return;
+
+      const newTasks = [...state.tasks];
+      newTasks.splice(sourceTaskIndexInAllTasks, 1);
+      newTasks.splice(destinationTaskIndexInAllTasks, 0, sourceTask);
+
+      state.tasks = newTasks;
+      saveTasksToLocalStorage(state.tasks);
+    },
   },
 });
 
-export const { addTask, editTask, deleteTask, changeTaskStage, setTasks } =
-  tasksSlice.actions;
+export const {
+  addTask,
+  editTask,
+  deleteTask,
+  changeTaskStage,
+  setTasks,
+  reorderTasks,
+} = tasksSlice.actions;
 
 export default tasksSlice.reducer;

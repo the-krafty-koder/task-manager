@@ -1,58 +1,24 @@
 import { Button, Stack, Typography } from "@mui/material";
-import Task from "../components/Task/Task";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import { addTask, setTasks } from "../store/taskSlice";
 import TaskModal from "../components/Task/TaskModal";
-import "./Home.css";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import Stage from "../components/Stage/Stage";
 import { StageOptions } from "../types";
+import type { Task } from "../types";
+import "./Home.css";
 
-type CategorizedTasks = {
-  pendingTasks: Task[];
-  progressTasks: Task[];
-  completeTasks: Task[];
-};
-
-const categorizeTasks = (tasks: Task[]) => {
-  const results: CategorizedTasks = {
-    pendingTasks: [],
-    progressTasks: [],
-    completeTasks: [],
-  };
-  for (let task of tasks) {
-    switch (task.stage) {
-      case StageOptions.PENDING:
-        results.pendingTasks.push(task);
-        break;
-      case StageOptions.PROGRESS:
-        results.progressTasks.push(task);
-        break;
-      case StageOptions.COMPLETE:
-        results.completeTasks.push(task);
-        break;
-    }
-  }
-  return results;
-};
 const Home = () => {
   const [isAddModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
-  const { pendingTasks, progressTasks, completeTasks } = categorizeTasks(tasks);
-
-  const handleAddTask = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseAddModal = () => {
-    setIsModalOpen(false);
-  };
 
   const handleSubmit = (task: Task) => {
     dispatch(addTask(task));
-    handleCloseAddModal();
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -74,25 +40,30 @@ const Home = () => {
     <>
       <Stack direction="row" justifyContent="end">
         <Button
-          size="medium"
           variant="contained"
-          sx={{ textTransform: "none" }}
-          onClick={handleAddTask}
+          className="addTaskButton"
+          onClick={() => setIsModalOpen(true)}
         >
           <Typography>Add task</Typography>
         </Button>
         <TaskModal
           open={isAddModalOpen}
-          onClose={handleCloseAddModal}
+          onClose={() => setIsModalOpen(false)}
           initialTask={null}
           onEdit={handleSubmit}
         />
       </Stack>
-      <Stack direction="row" justifyContent="space-evenly">
-        <Stage tasks={pendingTasks} title="Pending"></Stage>
-        <Stage tasks={progressTasks} title="Progress"></Stage>
-        <Stage tasks={completeTasks} title="Complete"></Stage>
-      </Stack>
+      <DndProvider backend={HTML5Backend}>
+        <div className="board">
+          {Object.values(StageOptions).map((stage) => (
+            <Stage
+              key={stage}
+              stage={stage}
+              tasks={tasks.filter((task) => task.stage === stage)}
+            />
+          ))}
+        </div>
+      </DndProvider>
     </>
   );
 };

@@ -40,11 +40,11 @@ const ConfirmationDialog = ({
           spacing={2}
           sx={{ mt: 3 }}
         >
-          <Button variant="contained" color="error" onClick={onConfirm}>
-            Delete
-          </Button>
           <Button variant="outlined" onClick={onClose}>
             Cancel
+          </Button>
+          <Button variant="contained" color="error" onClick={onConfirm}>
+            Delete
           </Button>
         </Stack>
       </Box>
