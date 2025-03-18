@@ -1,5 +1,5 @@
 .container {
-  min-width: 350px;
+  min-width: 80%;
   max-height: 200px;
   padding: 0;
   border-radius: 100px;
@@ -8,4 +8,8 @@
 
 .description {
   opacity: 0.8;
+}
+
+.taskHeader {
+  border-bottom: 1px dotted;
 }

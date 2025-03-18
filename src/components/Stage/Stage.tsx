@@ -5,12 +5,35 @@ import { reorderTasks, changeTaskStage } from "../../store/taskSlice";
 import { Task, StageOptions } from "../../types";
 import TaskComponent from "../Task/Task";
 import { Stack, Typography } from "@mui/material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import LoopIcon from "@mui/icons-material/Loop";
+import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 import "./Stage.css";
 
 interface StageProps {
   stage: StageOptions;
   tasks: Task[];
 }
+
+const getStageIcon = (stage: StageOptions) => {
+  const icons = {
+    [StageOptions.PENDING]: <PanoramaFishEyeIcon color="disabled" />,
+    [StageOptions.PROGRESS]: <LoopIcon color="info" />,
+    [StageOptions.COMPLETE]: <CheckCircleIcon color="success" />,
+  };
+
+  return icons[stage] ?? null;
+};
+
+const getStageChipColor = (stage: StageOptions) => {
+  const icons = {
+    [StageOptions.PENDING]: "#ededed",
+    [StageOptions.PROGRESS]: "#faf9c3",
+    [StageOptions.COMPLETE]: "#c3fac4",
+  };
+
+  return icons[stage] ?? null;
+};
 
 const Stage = ({ stage, tasks }: StageProps) => {
   const dispatch = useDispatch();
@@ -48,7 +71,14 @@ const Stage = ({ stage, tasks }: StageProps) => {
 
   return (
     <Stack ref={ref} className="column" spacing={2}>
-      <Typography variant="h6">{stage}</Typography>
+      <div
+        className="columnChip"
+        style={{ backgroundColor: getStageChipColor(stage) }}
+      >
+        {getStageIcon(stage)}{" "}
+        <Typography variant="subtitle2">{stage}</Typography>
+      </div>
+
       {tasks.map((task, index) => (
         <TaskComponent
           key={task.id}

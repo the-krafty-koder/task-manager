@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { StageOptions, Task } from "../../types";
+import { Task } from "../../types";
 import {
   Card,
   CardContent,
@@ -16,10 +16,8 @@ import ConfirmationDialog from "./ConfirmationDialog";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
 import { deleteTask, editTask } from "../../store/taskSlice";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import PendingIcon from "@mui/icons-material/Pending";
-import LoopIcon from "@mui/icons-material/Loop";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import "./Task.css";
 
 interface TaskProps {
   task: Task;
@@ -30,22 +28,12 @@ interface TaskProps {
 const MAX_LENGTH = 40;
 
 const StyledCard = styled(Card)({
-  width: 350,
+  width: 400,
   maxHeight: 200,
   borderRadius: 13,
   border: "1px solid rgba(0, 0, 0, 0.2)",
   backgroundColor: "#FFFFFF",
 });
-
-const getStageIcon = (stage: StageOptions) => {
-  const icons = {
-    [StageOptions.PENDING]: <PendingIcon color="disabled" />,
-    [StageOptions.PROGRESS]: <LoopIcon color="info" />,
-    [StageOptions.COMPLETE]: <CheckCircleIcon color="success" />,
-  };
-
-  return icons[stage] ?? null;
-};
 
 const truncateText = (text: string, maxLength = MAX_LENGTH) =>
   text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -120,15 +108,13 @@ const TaskComponent = ({ task, index, moveTask }: TaskProps) => {
             direction="row"
             justifyContent="space-between"
             alignItems="center"
+            className="taskHeader"
           >
-            <Stack direction="row" spacing={1} alignItems="center">
-              {getStageIcon(task.stage)}
-              <Typography variant="subtitle2" fontWeight="bold">
-                {task.title}
-              </Typography>
-            </Stack>
+            <Typography variant="subtitle2" fontWeight="bold">
+              {task.title}
+            </Typography>
             <IconButton onClick={openMenu}>
-              <MoreVertIcon />
+              <MoreHorizIcon />
             </IconButton>
             <Menu
               anchorEl={menuAnchor}
@@ -140,10 +126,7 @@ const TaskComponent = ({ task, index, moveTask }: TaskProps) => {
             </Menu>
           </Stack>
 
-          <Typography
-            variant="body2"
-            sx={{ mt: 1, ml: 1, color: "text.secondary" }}
-          >
+          <Typography variant="body2" sx={{ mt: 1, color: "text.secondary" }}>
             {truncateText(task.description)}
           </Typography>
         </CardContent>
