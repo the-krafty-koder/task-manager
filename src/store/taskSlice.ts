@@ -47,7 +47,10 @@ const tasksSlice = createSlice({
       action: PayloadAction<{ id: string; stage: StageOptions }>
     ) => {
       const task = state.tasks.find((task) => task.id === action.payload.id);
-      if (task) task.stage = action.payload.stage;
+      if (task) {
+        task.stage = action.payload.stage;
+        saveTasksToLocalStorage(state.tasks);
+      }
     },
 
     setTasks: (state, action: PayloadAction<Task[]>) => {
