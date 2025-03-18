@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Box } from "@mui/material";
 import TaskForm from "./TaskForm";
 import { Task } from "../../types";
