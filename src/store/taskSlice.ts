@@ -26,34 +26,35 @@ const tasksSlice = createSlice({
       state.tasks.push(action.payload);
       saveTasksToLocalStorage(state.tasks);
     },
+
     editTask: (state, action: PayloadAction<Task>) => {
-      const index = state.tasks.findIndex(
+      const taskIndex = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       );
-      if (index !== -1) {
-        state.tasks[index] = action.payload;
+      if (taskIndex !== -1) {
+        state.tasks[taskIndex] = action.payload;
         saveTasksToLocalStorage(state.tasks);
       }
     },
+
     deleteTask: (state, action: PayloadAction<string>) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
       saveTasksToLocalStorage(state.tasks);
     },
+
     changeTaskStage: (
       state,
       action: PayloadAction<{ id: string; stage: StageOptions }>
     ) => {
-      const index = state.tasks.findIndex(
-        (task) => task.id === action.payload.id
-      );
-      if (index !== -1) {
-        state.tasks[index].stage = action.payload.stage;
-      }
+      const task = state.tasks.find((task) => task.id === action.payload.id);
+      if (task) task.stage = action.payload.stage;
     },
+
     setTasks: (state, action: PayloadAction<Task[]>) => {
       state.tasks = action.payload;
       saveTasksToLocalStorage(state.tasks);
     },
+
     reorderTasks: (
       state,
       action: PayloadAction<{
@@ -63,34 +64,31 @@ const tasksSlice = createSlice({
       }>
     ) => {
       const { sourceIndex, destinationIndex, stage } = action.payload;
-
-      const stageTasks = state.tasks.filter((task) => task.stage === stage);
-
       if (sourceIndex === destinationIndex) return;
 
+      // Get tasks belonging to the specific stage
+      const stageTasks = state.tasks.filter((task) => task.stage === stage);
       const sourceTask = stageTasks[sourceIndex];
       const destinationTask = stageTasks[destinationIndex];
 
       if (!sourceTask || !destinationTask) return;
 
-      const sourceTaskIndexInAllTasks = state.tasks.findIndex(
+      // Find actual indices in the full task list
+      const sourceTaskIndex = state.tasks.findIndex(
         (task) => task.id === sourceTask.id
       );
-      const destinationTaskIndexInAllTasks = state.tasks.findIndex(
+      const destinationTaskIndex = state.tasks.findIndex(
         (task) => task.id === destinationTask.id
       );
 
-      if (
-        sourceTaskIndexInAllTasks === -1 ||
-        destinationTaskIndexInAllTasks === -1
-      )
-        return;
+      if (sourceTaskIndex === -1 || destinationTaskIndex === -1) return;
 
-      const newTasks = [...state.tasks];
-      newTasks.splice(sourceTaskIndexInAllTasks, 1);
-      newTasks.splice(destinationTaskIndexInAllTasks, 0, sourceTask);
+      // Move task in the state
+      const updatedTasks = [...state.tasks];
+      updatedTasks.splice(sourceTaskIndex, 1);
+      updatedTasks.splice(destinationTaskIndex, 0, sourceTask);
 
-      state.tasks = newTasks;
+      state.tasks = updatedTasks;
       saveTasksToLocalStorage(state.tasks);
     },
   },

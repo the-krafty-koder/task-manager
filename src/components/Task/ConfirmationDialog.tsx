@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal, Box, Typography, Stack, Button } from "@mui/material";
 
 interface ConfirmationDialogProps {

@@ -6,3 +6,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.homeContainer {
+  padding: 20px;
+}
