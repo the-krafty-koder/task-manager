@@ -5,7 +5,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Board from "./Board";
-import taskReducer, { setTasks } from "../store/taskSlice";
+import taskReducer, { setTasks } from "../store/taskStateSlice";
 import { Task, StageOptions } from "../types";
 
 const renderBoard = (preloadedTasks: Task[] = []) => {

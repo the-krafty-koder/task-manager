@@ -2,7 +2,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
-import { addTask, setTasks } from "../store/taskSlice";
+import { addTask, setTasks } from "../store/taskStateSlice";
 import TaskModal from "../components/Task/TaskModal";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";

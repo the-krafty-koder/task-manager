@@ -6,7 +6,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Stage from "./Stage";
 import { StageOptions, Task } from "../../types";
-import taskReducer, { changeTaskStage } from "../../store/taskSlice";
+import taskReducer, { changeTaskStage } from "../../store/taskStateSlice";
 
 const renderStage = (tasks: Task[] = [], stage = StageOptions.PENDING) => {
   const preloadedState = {

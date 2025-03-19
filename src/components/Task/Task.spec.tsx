@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { vi, it, expect, describe } from "vitest";
 import TaskComponent from "./Task";
-import taskReducer, { editTask, deleteTask } from "../../store/taskSlice";
+import taskReducer, { editTask, deleteTask } from "../../store/taskStateSlice";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { StageOptions, Task } from "../../types";

@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import taskReducer from "./store/taskSlice";
+import taskReducer from "./store/taskStateSlice";
 
 import App from "./App";
 import { StageOptions } from "./types";

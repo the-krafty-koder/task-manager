@@ -1,7 +1,7 @@
 import { useRef, useCallback } from "react";
 import { useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
-import { reorderTasks, changeTaskStage } from "../../store/taskSlice";
+import { reorderTasks, changeTaskStage } from "../../store/taskStateSlice";
 import { Task, StageOptions } from "../../types";
 import TaskComponent from "../Task/Task";
 import { Stack, Typography } from "@mui/material";

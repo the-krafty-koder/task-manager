@@ -2,7 +2,7 @@ import React, { useRef, useState, useCallback } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
-import { deleteTask, editTask } from "../../store/taskSlice";
+import { deleteTask, editTask } from "../../store/taskStateSlice";
 import "./Task.css";
 import type { Task } from "../../types";
 

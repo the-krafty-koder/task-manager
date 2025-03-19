@@ -18,7 +18,7 @@ const initialState: TasksState = {
   tasks: loadTasksFromLocalStorage(),
 };
 
-const tasksSlice = createSlice({
+const taskStateSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
@@ -104,6 +104,6 @@ export const {
   changeTaskStage,
   setTasks,
   reorderTasks,
-} = tasksSlice.actions;
+} = taskStateSlice.actions;
 
-export default tasksSlice.reducer;
+export default taskStateSlice.reducer;
