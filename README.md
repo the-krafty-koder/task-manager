@@ -1,54 +1,54 @@
-# React + TypeScript + Vite
+# Task Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a task manager that allows users to add, edit and delete various tasks
 
-Currently, two official plugins are available:
+## Running the app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Clone the repo at https://github.com/the-krafty-koder/task-manager
+- Once cloned, navigate to the project folder using a terminal and run
+  > cd task-manager
+  > npm install
+- Once all dependencies are installed, run the following command to
+  launch the app:
+  > npm run dev
+- Navigate to http://localhost:5173 on your browser to use the app
 
-## Expanding the ESLint configuration
+## Time taken
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- It took me around 4-5 hours to implement core functionality including
+  the bonus points. The little additional time was spent on refactoring and styling
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Implementation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- The app is composed of three main parts:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+  - Task: represents the actual task
+  - Stage: represents the three main stages (Pending, Progress, Complete)
+  - Board: represents the container in which all stages are found
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- A board acts as the container for all stages. Once tasks are retrieved
+  from the redux store, either on mounting after change in state, the board filters and passes the corresponding tasks to each stage for display. Each stage loops through the tasks and renders them individually. Every task has a menu button attached to it responsible for viewing, editing and deleting the said task via modals.
+
+- Redux toolkit was used to create a central store with functionality
+  for adding, editing, deleting, setting, changing stage and reordering tasks in the store.
+
+## Bonus points are covered in the implementation
+
+- All bonus points were implemented
+
+  1. Drag and drop between stages
+     The library react-dnd was used to implement drag and drop. The whole board served as the drag and drop area, with a stage acting as the drop zone and a task acting as the draggable item. Whenever a stage noted a drop happen, a changeTaskStage method would be dispatched onto the store to update a task's new stage.
+
+  2. Reordering
+     During rendering, a stage takes note of each task's index as part of the tasks passed to it. The Stage passes an additional callback function (moveTask function) to a Task containing a dispatch to the store to reorder tasks based on the tracked index. Now whenever a task is being dragged, its index and the index of the task it is hovering over is monitored. If the indices are different, the moveTask callback function is called, updating the store with the new ordering and thereby 'dropping' the new task
+
+  3. Persisting data
+     On initial loading, the store loads data from localStorage using localStorage.getItem and whenever any changes are made to the store, a resulting change is made on localStorage to ensure consistency.
+
+  4. Syncing tabs
+     An event listener is added to the storage event so that whenever the localStorage is updated with new tasks in one tab, a dispatch is initiated, updating the store with tasks saved to local storage, and thereby updating other open tabs - which obtain data from the store
+
+## Deployment
+
+- The app is hosted on digital ocean.
+- It is live at => https://stingray-app-dj8vv.ondigitalocean.app/
