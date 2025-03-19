@@ -5,8 +5,10 @@ This is a task manager that allows users to add, edit and delete various tasks
 ## Running the app
 
 - Clone the repo at https://github.com/the-krafty-koder/task-manager
-- Once cloned, navigate to the project folder using a terminal and run
+  > git clone https://github.com/the-krafty-koder/task-manager.git
+- Once cloned, navigate to the project folder using a terminal
   > cd task-manager
+- Install dependencies
   > npm install
 - Once all dependencies are installed, run the following command to
   launch the app:
@@ -52,3 +54,11 @@ This is a task manager that allows users to add, edit and delete various tasks
 
 - The app is hosted on digital ocean.
 - It is live at => https://stingray-app-dj8vv.ondigitalocean.app/
+
+## Potential improvements
+
+- Given more time, I would implement the following:
+  1. Task Prioritization – Allow users to set priority levels (e.g., High, Medium, Low) with color indicators.
+  2. Task Filtering & Sorting – Let users filter by stage, priority, or due date.
+  3. E2E tests - Write end to end tests using Cypress that cover core
+     functionality
