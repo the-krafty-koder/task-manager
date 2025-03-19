@@ -26,13 +26,13 @@ const getStageIcon = (stage: StageOptions) => {
 };
 
 const getStageChipColor = (stage: StageOptions) => {
-  const icons = {
+  const colors = {
     [StageOptions.PENDING]: "#ededed",
     [StageOptions.PROGRESS]: "#faf9c3",
     [StageOptions.COMPLETE]: "#c3fac4",
   };
 
-  return icons[stage] ?? null;
+  return colors[stage] ?? null;
 };
 
 const Stage = ({ stage, tasks }: StageProps) => {

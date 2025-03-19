@@ -16,7 +16,7 @@ This is a task manager that allows users to add, edit and delete various tasks
 ## Time taken
 
 - It took me around 4-5 hours to implement core functionality including
-  the bonus points. The little additional time was spent on refactoring and styling
+  the bonus points. The little additional time was spent on refactoring, styling and documentation.
 
 ## Implementation
 

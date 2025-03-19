@@ -30,10 +30,10 @@ interface TaskProps {
 const MAX_LENGTH = 40;
 
 const StyledCard = styled(Card)({
-  maxHeight: 200,
+  minHeight: "15vh",
   borderRadius: 13,
   border: "1px solid rgba(0, 0, 0, 0.2)",
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#ffffff",
 });
 
 const StyledDiv = styled("div")<{ isDragging: boolean }>(({ isDragging }) => ({
@@ -82,11 +82,6 @@ const TaskComponent = ({ task, index, moveTask }: TaskProps) => {
     closeMenu();
   }, [closeMenu]);
 
-  const openDeleteModal = useCallback(() => {
-    setModals((prev) => ({ ...prev, delete: true }));
-    closeMenu();
-  }, [closeMenu]);
-
   const handleEditTask = useCallback(
     (updatedTask: Task) => {
       dispatch(editTask(updatedTask));
@@ -94,6 +89,11 @@ const TaskComponent = ({ task, index, moveTask }: TaskProps) => {
     },
     [dispatch]
   );
+
+  const openDeleteModal = useCallback(() => {
+    setModals((prev) => ({ ...prev, delete: true }));
+    closeMenu();
+  }, [closeMenu]);
 
   const handleConfirmDelete = useCallback(() => {
     dispatch(deleteTask(task.id));

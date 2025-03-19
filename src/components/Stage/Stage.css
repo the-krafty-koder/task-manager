@@ -4,6 +4,7 @@
   background-color: #f7f7f7;
   border-radius: 13px;
   margin: 20px;
+  min-height: 65vh;
 }
 
 .columnChip {
