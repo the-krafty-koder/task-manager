@@ -1,5 +1,5 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Board from "./pages/Board";
 
 import {
   AppBar,
@@ -27,7 +27,7 @@ function App() {
             </Typography>
           </Toolbar>
         </AppBar>
-        <Home />
+        <Board />
       </Box>
     </ThemeProvider>
   );

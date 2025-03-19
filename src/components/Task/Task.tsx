@@ -1,6 +1,11 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { Task } from "../../types";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { deleteTask, editTask } from "../../store/taskSlice";
+import "./Task.css";
+import type { Task } from "../../types";
+
 import {
   Card,
   CardContent,
@@ -11,14 +16,11 @@ import {
   Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+
 import TaskModal from "./TaskModal";
 import ConfirmationDialog from "./ConfirmationDialog";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { deleteTask, editTask } from "../../store/taskSlice";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import "./Task.css";
 
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 interface TaskProps {
   task: Task;
   index: number;
@@ -34,6 +36,12 @@ const StyledCard = styled(Card)({
   border: "1px solid rgba(0, 0, 0, 0.2)",
   backgroundColor: "#FFFFFF",
 });
+
+const StyledDiv = styled("div")<{ isDragging: boolean }>(({ isDragging }) => ({
+  opacity: isDragging ? 0.5 : 1,
+  marginBottom: "4px",
+  cursor: "grab",
+}));
 
 const truncateText = (text: string, maxLength = MAX_LENGTH) =>
   text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
@@ -94,14 +102,7 @@ const TaskComponent = ({ task, index, moveTask }: TaskProps) => {
   }, [dispatch, task.id]);
 
   return (
-    <div
-      ref={ref}
-      style={{
-        opacity: isDragging ? 0.5 : 1,
-        marginBottom: "4px",
-        cursor: "grab",
-      }}
-    >
+    <StyledDiv ref={ref} isDragging={isDragging}>
       <StyledCard>
         <CardContent>
           <Stack
@@ -145,7 +146,7 @@ const TaskComponent = ({ task, index, moveTask }: TaskProps) => {
         title={task.title}
         onConfirm={handleConfirmDelete}
       />
-    </div>
+    </StyledDiv>
   );
 };
 

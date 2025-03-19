@@ -8,9 +8,9 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Stage from "../components/Stage/Stage";
 import { StageOptions, Task } from "../types";
-import "./Home.css";
+import "./Board.css";
 
-const Home = () => {
+const Board = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
@@ -40,7 +40,7 @@ const Home = () => {
   }, [tasks]);
 
   return (
-    <div className="homeContainer">
+    <div className="boardContainer">
       <Stack direction="row" justifyContent="end">
         <Button variant="contained" onClick={() => setIsAddModalOpen(true)}>
           <Typography>Add task</Typography>
@@ -65,4 +65,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Board;
