@@ -30,7 +30,6 @@ interface TaskProps {
 const MAX_LENGTH = 40;
 
 const StyledCard = styled(Card)({
-  width: 400,
   maxHeight: 200,
   borderRadius: 13,
   border: "1px solid rgba(0, 0, 0, 0.2)",
@@ -122,7 +121,7 @@ const TaskComponent = ({ task, index, moveTask }: TaskProps) => {
               open={Boolean(menuAnchor)}
               onClose={closeMenu}
             >
-              <MenuItem onClick={openEditModal}>Edit</MenuItem>
+              <MenuItem onClick={openEditModal}>View/Edit</MenuItem>
               <MenuItem onClick={openDeleteModal}>Delete</MenuItem>
             </Menu>
           </Stack>

@@ -28,7 +28,7 @@ describe("TaskForm", () => {
 
     render(<TaskForm initialTask={task} onSubmit={mockOnSubmit} />);
 
-    expect(screen.getByText("Edit Task")).toBeInTheDocument();
+    expect(screen.getByText("View/Edit Task")).toBeInTheDocument();
     expect(screen.getByDisplayValue("Test Task")).toBeInTheDocument();
     expect(screen.getByDisplayValue("Test Description")).toBeInTheDocument();
   });

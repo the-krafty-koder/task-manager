@@ -18,7 +18,7 @@ interface TaskFormProps {
 }
 
 const TaskForm = ({ initialTask, onSubmit, onCancel }: TaskFormProps) => {
-  const header = initialTask ? "Edit Task" : "Add Task";
+  const header = initialTask ? "View/Edit Task" : "Add Task";
   const [task, setTask] = useState(
     initialTask || {
       id: crypto.randomUUID(),

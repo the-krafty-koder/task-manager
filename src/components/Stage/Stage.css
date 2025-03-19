@@ -1,15 +1,15 @@
 .column {
-  min-width: 400px;
+  width: 30%;
   padding: 15px;
   background-color: #f7f7f7;
   border-radius: 13px;
+  margin: 10px;
 }
 
 .columnChip {
-  width: 115px;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: start;
   border-radius: 15px;
   padding: 5px;
 }

@@ -21,7 +21,7 @@ describe("TaskModal", () => {
       />
     );
 
-    expect(screen.getByText("Edit Task")).toBeInTheDocument();
+    expect(screen.getByText("View/Edit Task")).toBeInTheDocument();
   });
 
   it("calls onEdit when the form is submitted", () => {

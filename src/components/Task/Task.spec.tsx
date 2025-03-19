@@ -54,10 +54,10 @@ describe("TaskComponent", () => {
     const menuButton = screen.getByRole("button");
     fireEvent.click(menuButton);
 
-    await screen.findByText("Edit");
+    await screen.findByText("View/Edit");
     await screen.findByText("Delete");
 
-    fireEvent.click(screen.getByText("Edit"));
+    fireEvent.click(screen.getByText("View/Edit"));
 
     await waitFor(() =>
       expect(screen.queryByText("Edit")).not.toBeInTheDocument()
@@ -74,9 +74,9 @@ describe("TaskComponent", () => {
     );
 
     fireEvent.click(screen.getByRole("button"));
-    await screen.findByText("Edit");
+    await screen.findByText("View/Edit");
 
-    fireEvent.click(screen.getByText("Edit"));
+    fireEvent.click(screen.getByText("View/Edit"));
 
     const titleInput = await screen.findByRole("textbox", { name: /title/i });
     fireEvent.change(titleInput, { target: { value: "Updated Task" } });

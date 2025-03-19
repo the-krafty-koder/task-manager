@@ -76,7 +76,9 @@ const Stage = ({ stage, tasks }: StageProps) => {
         style={{ backgroundColor: getStageChipColor(stage) }}
       >
         {getStageIcon(stage)}{" "}
-        <Typography variant="subtitle2">{stage}</Typography>
+        <Typography variant="subtitle2" sx={{ ml: 1 }}>
+          {stage}
+        </Typography>
       </div>
 
       {tasks.map((task, index) => (

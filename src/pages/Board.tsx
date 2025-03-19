@@ -41,7 +41,7 @@ const Board = () => {
 
   return (
     <div className="boardContainer">
-      <Stack direction="row" justifyContent="end">
+      <Stack direction="row" justifyContent="end" sx={{ padding: "20px" }}>
         <Button variant="contained" onClick={() => setIsAddModalOpen(true)}>
           <Typography>Add task</Typography>
         </Button>
