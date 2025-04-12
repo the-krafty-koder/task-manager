@@ -62,9 +62,9 @@ const TaskForm = ({ initialTask, onSubmit, onCancel }: TaskFormProps) => {
               setTask({ ...task, stage: e.target.value as StageOptions })
             }
           >
-            <MenuItem value={StageOptions.PENDING}>Pending</MenuItem>
-            <MenuItem value={StageOptions.PROGRESS}>In Progress</MenuItem>
-            <MenuItem value={StageOptions.COMPLETE}>Complete</MenuItem>
+            {Object.values(StageOptions).map((stage) => (
+              <MenuItem value={stage}>{stage}</MenuItem>
+            ))}
           </Select>
         </FormControl>
         <Stack direction="row" justifyContent="flex-end" spacing={2}>

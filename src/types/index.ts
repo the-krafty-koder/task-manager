@@ -1,6 +1,7 @@
 export enum StageOptions {
+  BACKLOG = "BACKLOG",
   PENDING = "PENDING",
-  PROGRESS = "PROGRESS",
+  PROGRESS = "IN PROGRESS",
   COMPLETE = "COMPLETE",
 }
 
