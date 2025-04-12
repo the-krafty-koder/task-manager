@@ -8,6 +8,7 @@ import { Stack, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LoopIcon from "@mui/icons-material/Loop";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import "./Stage.css";
 
 interface StageProps {
@@ -17,6 +18,7 @@ interface StageProps {
 
 const getStageIcon = (stage: StageOptions) => {
   const icons = {
+    [StageOptions.BACKLOG]: <RestartAltIcon color="disabled" />,
     [StageOptions.PENDING]: <PanoramaFishEyeIcon color="disabled" />,
     [StageOptions.PROGRESS]: <LoopIcon color="info" />,
     [StageOptions.COMPLETE]: <CheckCircleIcon color="success" />,
@@ -27,6 +29,7 @@ const getStageIcon = (stage: StageOptions) => {
 
 const getStageChipColor = (stage: StageOptions) => {
   const colors = {
+    [StageOptions.BACKLOG]: "#ededed",
     [StageOptions.PENDING]: "#ededed",
     [StageOptions.PROGRESS]: "#faf9c3",
     [StageOptions.COMPLETE]: "#c3fac4",
