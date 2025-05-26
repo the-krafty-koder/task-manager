@@ -1,4 +1,4 @@
-# Task Manager App
+# Jotter
 
 This is a task manager that allows users to manipulate various tasks, drag and drop, persist data after page refreshes and synchronize data across tabs
 
@@ -18,4 +18,4 @@ This is a task manager that allows users to manipulate various tasks, drag and d
 ## Deployment
 
 - The app is hosted on digital ocean.
-- It is live at => https://stingray-app-dj8vv.ondigitalocean.app/
+- It is live at => https://jotter.madebywayne.site/

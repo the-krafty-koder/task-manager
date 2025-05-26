@@ -1,3 +1,4 @@
+import NotesIcon from "@mui/icons-material/Notes";
 import "./App.css";
 import Board from "./pages/Board";
 
@@ -5,6 +6,7 @@ import {
   AppBar,
   Box,
   createTheme,
+  Stack,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -22,9 +24,12 @@ function App() {
       <Box>
         <AppBar className="appBar">
           <Toolbar>
-            <Typography variant="h6" component="div">
-              Task manager
-            </Typography>
+            <Stack direction="row" spacing={1} alignItems="center">
+              <Typography variant="h6" component="div">
+                Jotter
+              </Typography>
+              <NotesIcon />
+            </Stack>
           </Toolbar>
         </AppBar>
         <Board />

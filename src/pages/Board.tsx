@@ -1,4 +1,4 @@
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Link, Stack, Typography } from "@mui/material";
 import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
@@ -41,7 +41,20 @@ const Board = () => {
 
   return (
     <div className="boardContainer">
-      <Stack direction="row" justifyContent="end" sx={{ padding: "20px" }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{ padding: "20px" }}
+      >
+        <Typography variant="subtitle1">
+          {" "}
+          Read the description{" "}
+          <Link href="https://github.com/the-krafty-koder/task-manager">
+            here
+          </Link>
+          .
+        </Typography>
         <Button variant="contained" onClick={() => setIsAddModalOpen(true)}>
           <Typography>Add task</Typography>
         </Button>
